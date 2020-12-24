@@ -2,13 +2,13 @@ package com.example.meteoapp.city
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meteoapp.App
 import com.example.meteoapp.Database
 import com.example.meteoapp.R
+import com.example.meteoapp.utils.toast
 
 class CityFragment: Fragment(), CityAdapter.CityItemListener {
 
@@ -75,18 +75,41 @@ class CityFragment: Fragment(), CityAdapter.CityItemListener {
             cities.add(city)
             adapter.notifyDataSetChanged()
         } else {
-            Toast.makeText(context, "",
-                Toast.LENGTH_LONG).show()
+            context?.toast(getString(R.string.city_message_could_not_create_city))
         }
 
     }
 
     override fun onCitySelected(city: City) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onCityDeleted(city: City) {
-        TODO("Not yet implemented")
+        showDeleteCityDialog(city)
+    }
+
+    private fun showDeleteCityDialog(city: City) {
+        val deleteCityFragment = DeleteCityDialogFragment.newInstance(city.name)
+
+        deleteCityFragment.listener = object: DeleteCityDialogFragment.DeleteCityDialogListener {
+            override fun onDialogPostiveClick() {
+                deleteCity(city)
+            }
+
+            override fun onDialogNegativeClick() {}
+        }
+
+        deleteCityFragment.show(fragmentManager!!, "DeleteCityDialogFragment")
+    }
+
+    private fun deleteCity(city: City) {
+        if(database.deleteCity(city)) {
+            cities.remove(city)
+            adapter.notifyDataSetChanged()
+            context?.toast(getString(R.string.city_message_info_city_deleted, city.name))
+        } else {
+            context?.toast(getString(R.string.city_message_error_could_not_delete_city, city.name))
+        }
     }
 
 }
