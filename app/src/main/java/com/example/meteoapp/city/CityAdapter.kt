@@ -3,14 +3,13 @@ package com.example.meteoapp.city
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meteoapp.R
 
 class CityAdapter(private val cities: List<City>,
-    private val cityListener: CityAdapter.CityItemListener): RecyclerView.Adapter<CityAdapter.ViewHolder>(),
+    private val cityListener: CityItemListener): RecyclerView.Adapter<CityAdapter.ViewHolder>(),
     View.OnClickListener {
 
     interface CityItemListener {

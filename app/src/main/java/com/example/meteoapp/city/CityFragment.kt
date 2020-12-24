@@ -12,6 +12,12 @@ import com.example.meteoapp.utils.toast
 
 class CityFragment: Fragment(), CityAdapter.CityItemListener {
 
+    interface CityFragmentListener {
+        fun onCitySelected(city: City)
+    }
+
+    var listener: CityFragmentListener? = null
+
     private lateinit var database: Database
     private lateinit var cities: MutableList<City>
     private lateinit var recyclerView: RecyclerView
@@ -81,7 +87,7 @@ class CityFragment: Fragment(), CityAdapter.CityItemListener {
     }
 
     override fun onCitySelected(city: City) {
-
+        listener?.onCitySelected(city)
     }
 
     override fun onCityDeleted(city: City) {
