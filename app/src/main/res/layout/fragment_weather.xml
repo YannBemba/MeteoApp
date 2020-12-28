@@ -1,6 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#121212">
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="#7180E0"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="Bordeaux" />
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="@id/city"
+            app:layout_constraintTop_toBottomOf="@id/city"
+            android:src="@drawable/ic_moon" />
+
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            app:layout_constraintLeft_toRightOf="@id/weather_icon"
+            app:layout_constraintTop_toTopOf="@id/weather_icon"
+            app:layout_constraintBottom_toBottomOf="@id/weather_icon"
+            android:layout_marginStart="30dp"
+            android:textSize="30sp"
+            android:textColor="@android:color/background_light"
+            tools:text="Sunny" />
+
+        <FrameLayout
+            android:id="@+id/back_info"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#1E88E5"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_icon"
+            app:layout_constraintVertical_bias="0.348"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/temperature_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/weather_icon"
+            app:layout_constraintTop_toTopOf="@id/back_info"
+            app:layout_constraintBottom_toBottomOf="@id/humidity_label"
+            app:layout_constraintVertical_chainStyle="spread"
+            style="@style/WeatherLabel"
+            android:text="Temperature"
+            android:fontFamily="@font/poppins" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/temperature_label"
+            app:layout_constraintTop_toTopOf="@id/temperature_label"
+            app:layout_constraintBottom_toBottomOf="@id/temperature_label"
+            tools:text="30°C"
+            style="@style/WeatherData"/>
+
+        <TextView
+            android:id="@+id/humidity_label"
+            style="@style/WeatherLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Humidity"
+            app:layout_constraintBottom_toBottomOf="@id/pressure_label"
+            app:layout_constraintEnd_toEndOf="@+id/pressure_label"
+            app:layout_constraintRight_toRightOf="@id/temperature_label"
+            app:layout_constraintStart_toStartOf="@+id/back_info"
+            app:layout_constraintTop_toBottomOf="@id/temperature_label" />
+
+        <TextView
+            android:id="@+id/humidity"
+            style="@style/WeatherData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/humidity_label"
+            app:layout_constraintLeft_toRightOf="@id/temperature"
+            app:layout_constraintStart_toEndOf="@+id/humidity_label"
+            app:layout_constraintTop_toTopOf="@id/humidity_label"
+            tools:text="52%" />
+
+        <TextView
+            android:id="@+id/pressure_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/WeatherLabel"
+            app:layout_constraintLeft_toLeftOf="@id/temperature_label"
+            app:layout_constraintRight_toRightOf="@id/temperature_label"
+            app:layout_constraintTop_toBottomOf="@id/humidity_label"
+            app:layout_constraintBottom_toBottomOf="@id/back_info"
+            android:text="Pressure" />
+
+        <TextView
+            android:id="@+id/pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/temperature"
+            app:layout_constraintTop_toTopOf="@id/pressure_label"
+            app:layout_constraintBottom_toBottomOf="@id/pressure_label"
+            style="@style/WeatherData"
+            tools:text="1014 hPa"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
